@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 description = "Public API payload types for the Shuriken platform"
 license = "MIT"
+repository = "https://github.com/ShurikenTrade/shuriken-api-types-rs"
+homepage = "https://app.shuriken.trade"
+keywords = ["shuriken", "crypto", "trading", "api"]
+categories = ["api-bindings"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
