@@ -1,5 +1,7 @@
 # shuriken-api-types
 
+[![crates.io](https://img.shields.io/crates/v/shuriken-api-types)](https://crates.io/crates/shuriken-api-types)
+
 Shared Rust types for the [Shuriken](https://app.shuriken.trade) API — WebSocket stream payloads and common enums used across SDKs.
 
 > **Status:** Early development — types may change.
@@ -8,7 +10,7 @@ Shared Rust types for the [Shuriken](https://app.shuriken.trade) API — WebSock
 
 ```toml
 [dependencies]
-shuriken-api-types = { git = "https://github.com/ShurikenTrade/shuriken-api-types-rs" }
+shuriken-api-types = "0.1"
 ```
 
 ## Overview
