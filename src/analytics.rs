@@ -1,10 +1,12 @@
 use serde::{Deserialize, Serialize};
 
+use crate::Network;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TokenDistributionStatsEvent {
   pub token_address: String,
-  pub network: String,
+  pub network: Network,
   pub block_index: i64,
   #[serde(skip_serializing_if = "Option::is_none")]
   pub stats: Option<TokenDistributionStats>,
@@ -35,7 +37,7 @@ pub struct TokenDistributionStats {
 #[serde(rename_all = "camelCase")]
 pub struct HolderStatsEvent {
   pub token_address: String,
-  pub network: String,
+  pub network: Network,
   pub block_index: i64,
   #[serde(skip_serializing_if = "Option::is_none")]
   pub stats: Option<HolderStats>,

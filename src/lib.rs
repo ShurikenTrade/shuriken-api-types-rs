@@ -6,5 +6,8 @@ pub mod automation;
 pub mod notification;
 pub mod wallet;
 
+mod network;
+pub use network::{Network, UnknownNetworkError};
+
 mod platform;
 pub use platform::Platform;

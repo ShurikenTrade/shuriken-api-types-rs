@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::Network;
+
 // ── SVM ──────────────────────────────────────────────────────────────────────
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -10,7 +12,7 @@ pub struct SvmNativeBalanceEvent {
   pub block_time: i64,
   pub pre_balance: u64,
   pub post_balance: u64,
-  pub network: String,
+  pub network: Network,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -23,7 +25,7 @@ pub struct SvmTokenBalanceEvent {
   pub decimals: u32,
   pub pre_balance: u64,
   pub post_balance: u64,
-  pub network: String,
+  pub network: Network,
 }
 
 // ── EVM ──────────────────────────────────────────────────────────────────────
@@ -36,5 +38,5 @@ pub struct EvmNativeBalanceEvent {
   pub block_number: u64,
   pub block_time: i64,
   pub balance: String,
-  pub network: String,
+  pub network: Network,
 }

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::Platform;
+use crate::{Network, Platform};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -41,7 +41,7 @@ pub struct SignalFeedUpdateEvent {
   #[serde(rename = "type")]
   pub event_type: String,
   pub token_address: String,
-  pub network: String,
+  pub network: Network,
   #[serde(skip_serializing_if = "Option::is_none")]
   pub profile_id: Option<String>,
 }

@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::Network;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SwapEvent {
@@ -32,7 +34,7 @@ pub struct SwapEvent {
   pub inferred_dex_type: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   pub platform_name: Option<String>,
-  pub network: String,
+  pub network: Network,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -55,7 +57,7 @@ pub struct TokenPoolEvent {
   pub market_cap_usd: Option<String>,
   pub block_number: u64,
   pub timestamp_updated_ms: u64,
-  pub network: String,
+  pub network: Network,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -68,5 +70,5 @@ pub struct TokenBalanceEvent {
   pub block_time: i64,
   pub balance: String,
   pub decimals: u32,
-  pub network: String,
+  pub network: Network,
 }
