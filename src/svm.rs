@@ -81,9 +81,16 @@ pub struct BondingCurveCreationEvent {
     pub curve_address: String,
     pub curve_dex_type: String,
     pub creator: String,
+    pub signature: String,
+    pub slot: u64,
+    pub block_time: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub block_height: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub block_hash: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transaction_index: Option<u32>,
     pub network: Network,
-    pub creation_timestamp: i64,
-    pub block_index: i64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -94,9 +101,16 @@ pub struct BondingCurveGraduationEvent {
     pub curve_dex_type: String,
     pub dest_pool_address: String,
     pub dest_pool_dex_type: String,
+    pub signature: String,
+    pub slot: u64,
+    pub block_time: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub block_height: Option<u64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub block_hash: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transaction_index: Option<u32>,
     pub network: Network,
-    pub graduation_timestamp: i64,
-    pub block_index: i64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
