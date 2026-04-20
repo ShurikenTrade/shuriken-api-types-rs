@@ -76,19 +76,26 @@ pub struct TokenPoolEvent {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct BondingCurveEvent {
+pub struct BondingCurveCreationEvent {
     pub token_address: String,
     pub curve_address: String,
     pub curve_dex_type: String,
+    pub creator: String,
     pub network: Network,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub creation_timestamp: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub graduation_timestamp: Option<i64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub dest_pool_address: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub dest_pool_dex_type: Option<String>,
+    pub creation_timestamp: i64,
+    pub block_index: i64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BondingCurveGraduationEvent {
+    pub token_address: String,
+    pub curve_address: String,
+    pub curve_dex_type: String,
+    pub dest_pool_address: String,
+    pub dest_pool_dex_type: String,
+    pub network: Network,
+    pub graduation_timestamp: i64,
     pub block_index: i64,
 }
 
