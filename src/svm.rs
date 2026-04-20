@@ -84,10 +84,8 @@ pub struct BondingCurveCreationEvent {
     pub signature: String,
     pub slot: u64,
     pub block_time: i64,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub block_height: Option<u64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub block_hash: Option<String>,
+    pub block_height: u64,
+    pub block_hash: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction_index: Option<u32>,
     pub network: Network,
@@ -104,10 +102,8 @@ pub struct BondingCurveGraduationEvent {
     pub signature: String,
     pub slot: u64,
     pub block_time: i64,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub block_height: Option<u64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub block_hash: Option<String>,
+    pub block_height: u64,
+    pub block_hash: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction_index: Option<u32>,
     pub network: Network,
