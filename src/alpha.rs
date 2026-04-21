@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+use crate::signal::{FeedTokenMeta, FeedTokenSignal};
 use crate::{Network, Platform};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -43,7 +44,13 @@ pub struct SignalFeedUpdateEvent {
     pub token_address: String,
     pub network: Network,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub token_meta: Option<FeedTokenMeta>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub latest_signal: Option<FeedTokenSignal>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub profile_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub feed_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
