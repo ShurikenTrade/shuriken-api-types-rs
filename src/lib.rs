@@ -1,6 +1,7 @@
 pub mod alpha;
 pub mod analytics;
 pub mod automation;
+pub mod error;
 pub mod evm;
 pub mod notification;
 pub mod signal;
