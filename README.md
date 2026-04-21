@@ -39,6 +39,18 @@ let event: SwapEvent = serde_json::from_str(&payload)?;
 let network: Network = "solana".parse()?;
 ```
 
+## Releasing
+
+Use [`cargo-release`](https://github.com/crate-ci/cargo-release) — **never** run `cargo publish` manually (CI handles publishing when it sees a new tag).
+
+```bash
+cargo release patch   # bug fixes, doc updates
+cargo release minor   # new types, new fields, new modules
+cargo release major   # breaking changes
+```
+
+This bumps the version, commits, tags, and pushes. CI then publishes to crates.io.
+
 ## License
 
 MIT

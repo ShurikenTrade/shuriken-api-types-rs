@@ -2,13 +2,19 @@
 
 Shared payload types for the Shuriken platform — consumed by `shuriken-sdk-rs` and the private monorepo.
 
-## After every change
+## Releasing
 
-1. **Bump the version** in `Cargo.toml` following semver:
-   - **patch** (0.1.0 → 0.1.1): bug fixes, field doc updates
-   - **minor** (0.1.0 → 0.2.0): new types, new fields, new modules
-   - **major** (0.1.0 → 1.0.0): breaking changes (renamed/removed types, changed field types)
-2. **Update `README.md`** if new modules are added.
+Use `cargo release` — **never** run `cargo publish` manually (CI handles publishing when it sees a new tag).
+
+```bash
+cargo release patch   # bug fixes, field doc updates
+cargo release minor   # new types, new fields, new modules
+cargo release major   # breaking changes (renamed/removed types, changed field types)
+```
+
+This will: bump `Cargo.toml` version → commit → create git tag → push to origin. CI then publishes to crates.io.
+
+**Update `README.md`** if new modules are added.
 
 ## Build & check
 
