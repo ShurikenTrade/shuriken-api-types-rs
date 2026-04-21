@@ -10,7 +10,7 @@ Shared Rust types for the [Shuriken](https://app.shuriken.trade) API — WebSock
 
 ```toml
 [dependencies]
-shuriken-api-types = "0.1"
+shuriken-api-types = "0.4"
 ```
 
 ## Overview
