@@ -14,6 +14,8 @@ pub struct MessageAuthor {
     pub display_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avatar_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub is_bot: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
