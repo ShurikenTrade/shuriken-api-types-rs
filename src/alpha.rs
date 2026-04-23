@@ -30,6 +30,7 @@ pub struct MessageEvent {
     pub channel_id: String,
     pub platform: Platform,
     pub content: String,
+    #[serde(rename = "timestamp")]
     pub timestamp_ms: i64,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub author: Option<MessageAuthor>,
