@@ -35,6 +35,8 @@ pub enum MessageEvent {
     Discord(DiscordMessageEvent),
     #[serde(rename = "telegram")]
     Telegram(TelegramMessageEvent),
+    #[serde(rename = "x")]
+    X(XMessageEvent),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -85,6 +87,58 @@ pub struct TelegramMessageEvent {
     pub is_deleted: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_to_message_id: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct XMessageEvent {
+    pub tweet_id: String,
+    pub content: String,
+    #[serde(rename = "timestamp")]
+    pub timestamp_ms: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub author: Option<XAuthor>,
+    pub tokens: Vec<MessageToken>,
+    pub hashtags: Vec<String>,
+    pub cashtags: Vec<String>,
+    pub mentions: Vec<XMention>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub public_metrics: Option<XPublicMetrics>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub conversation_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub in_reply_to_user_id: Option<String>,
+    pub media_urls: Vec<String>,
+    pub is_deleted: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct XAuthor {
+    pub user_id: String,
+    pub username: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub display_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub avatar_url: Option<String>,
+    pub verified: bool,
+    pub followers_count: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct XMention {
+    pub username: String,
+    pub user_id: String,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct XPublicMetrics {
+    pub like_count: u32,
+    pub retweet_count: u32,
+    pub reply_count: u32,
+    pub quote_count: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
