@@ -30,6 +30,15 @@ pub struct MessageToken {
 pub struct MessageEvent {
     pub message_id: String,
     pub channel_id: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub guild_id: Option<String>,
+    /// Channel name at ingest time. Frozen — does not track renames.
+    /// For live names, resolve channel_id via the alpha-ui registry.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_channel_name: Option<String>,
+    /// Guild name at ingest time (Discord only). Frozen — does not track renames.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_guild_name: Option<String>,
     pub platform: Platform,
     pub content: String,
     #[serde(rename = "timestamp")]
@@ -37,6 +46,13 @@ pub struct MessageEvent {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub author: Option<MessageAuthor>,
     pub tokens: Vec<MessageToken>,
+    pub is_edited: bool,
+    pub is_deleted: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub reply_to_message_id: Option<String>,
+    /// Telegram forum topic title (megagroups with forum=true).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub topic_title: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
