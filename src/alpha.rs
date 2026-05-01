@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use crate::signal::{FeedTokenMeta, FeedTokenSignal};
-use crate::{Network, Platform};
+use crate::Network;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -25,21 +25,31 @@ pub struct MessageToken {
     pub chain: String,
 }
 
+/// Platform-tagged message event. Each variant carries only the fields
+/// meaningful to its platform — Discord callers don't see Telegram-only fields
+/// and vice versa.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "platform", content = "data", rename_all = "camelCase")]
+pub enum MessageEvent {
+    #[serde(rename = "discord")]
+    Discord(DiscordMessageEvent),
+    #[serde(rename = "telegram")]
+    Telegram(TelegramMessageEvent),
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct MessageEvent {
+pub struct DiscordMessageEvent {
     pub message_id: String,
+    pub guild_id: String,
     pub channel_id: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub guild_id: Option<String>,
-    /// Channel name at ingest time. Frozen — does not track renames.
-    /// For live names, resolve channel_id via the alpha-ui registry.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub snapshot_channel_name: Option<String>,
-    /// Guild name at ingest time (Discord only). Frozen — does not track renames.
+    /// Server name at ingest time. Frozen — does not track renames.
+    /// For live names, resolve guild_id via the alpha-ui registry.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub snapshot_guild_name: Option<String>,
-    pub platform: Platform,
+    /// Channel name at ingest time. Frozen — does not track renames.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_channel_name: Option<String>,
     pub content: String,
     #[serde(rename = "timestamp")]
     pub timestamp_ms: i64,
@@ -50,9 +60,31 @@ pub struct MessageEvent {
     pub is_deleted: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_to_message_id: Option<String>,
-    /// Telegram forum topic title (megagroups with forum=true).
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TelegramMessageEvent {
+    pub message_id: String,
+    pub chat_id: String,
+    /// Chat title at ingest time. Frozen — does not track renames.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_chat_title: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub topic_id: Option<i32>,
+    /// Forum topic title (megagroups with forum=true).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub topic_title: Option<String>,
+    pub content: String,
+    #[serde(rename = "timestamp")]
+    pub timestamp_ms: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub author: Option<MessageAuthor>,
+    pub tokens: Vec<MessageToken>,
+    pub is_edited: bool,
+    pub is_deleted: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub reply_to_message_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
