@@ -34,6 +34,10 @@ pub struct DiscordSignalSource {
     pub author_display_name: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub webhook_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_guild_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_channel_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -54,6 +58,8 @@ pub struct TelegramSignalSource {
     pub sender_is_bot: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sender_display_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snapshot_chat_title: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
